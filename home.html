@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chandrakar Parsad Gautam – Data Analyst in Progress</title>
+
+  <!-- Google Font (needs internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Colours and basics ===== */
+    :root {
+      --ink: #F1F3FF;
+      --grey: #D2D2D2;
+      --dark: #0A0C1C;
+      --line: rgba(255, 255, 255, .14);
+      --c1: #00D2E8;
+      --c2: #3446E0;
+      --c3: #8E2BE6;
+      --c4: #E3208C;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #000; }
+    body {
+      color: var(--ink);
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== Page-load animation (fade + slide up) ===== */
+    .rise {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ===== HERO: grey left, black right, diagonal edge ===== */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      grid-template-rows: auto 1fr;
+      min-height: 600px;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero::before {               /* the grey diagonal panel */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--grey);
+      clip-path: polygon(0 0, 58% 0, 50.4% 100%, 0 100%);
+    }
+
+    /* top bar */
+    .topbar {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px max(20px, calc((100% - 1180px) / 2 + 20px)) 0;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      font-weight: 700; letter-spacing: .04em; color: #fff;
+      background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+    }
+    .menu { display: flex; align-items: center; gap: 6px; font-size: .92rem; }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      transition: background .2s, color .2s;
+    }
+    .menu a:hover { background: rgba(255, 255, 255, .18); }
+    .menu a.active { background: #fff; color: var(--dark); font-weight: 600; }   /* current page */
+    .menu a.active:hover { background: var(--c1); }
+    .menu a:focus-visible { outline: 3px solid var(--c2); outline-offset: 3px; }
+
+    /* left text */
+    .hero-text {
+      grid-column: 1;
+      grid-row: 2;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 24px 48px max(20px, calc((100vw - 1180px) / 2 + 20px));
+    }
+    .hi { margin: 0 0 12px; font-size: 1.15rem; color: #3C4156; }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(2rem, 4.2vw, 3.6rem);
+      letter-spacing: .04em;
+      line-height: 1.15;
+      /* shimmering gradient text */
+      background: linear-gradient(90deg, var(--dark), var(--c2), var(--c3), var(--dark));
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 7s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 250% 0; } }
+
+    /* typing tagline */
+    .role {
+      margin: 16px 0 0;
+      max-width: 30em;
+      min-height: 4.8em;            /* keeps layout steady while typing */
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #2A2E45;
+    }
+    .caret {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      margin-left: 3px;
+      vertical-align: -.15em;
+      background: var(--c2);
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .sr {                           /* visible only to screen readers */
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    /* right photo */
+    .photo-wrap { grid-column: 2; grid-row: 1 / 3; display: flex; }
+    .hero-photo {
+      position: relative;
+      flex: 1;
+      min-height: 420px;
+      background: #0C0F26;
+      clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%);   /* diagonal edge */
+    }
+    .hero-photo img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+    }
+    .hero-photo::after {            /* dark fade so the menu is readable */
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .6), transparent 24%);
+      pointer-events: none;
+    }
+
+    /* ===== SECTIONS ===== */
+    .band { padding-left: max(20px, calc((100% - 1000px) / 2 + 20px)); padding-right: max(20px, calc((100% - 1000px) / 2 + 20px)); }
+    h2 { margin: 0 0 14px; font-size: 1.9rem; font-weight: 600; }
+    h2::after {                     /* gradient underline that grows */
+      content: "";
+      display: block;
+      width: 64px; height: 4px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+      animation: grow 1.2s .9s both cubic-bezier(.2, .7, .2, 1);
+    }
+    @keyframes grow { from { width: 0; } to { width: 64px; } }
+
+    /* About: grey band with diagonal bottom */
+    #about {
+      background: var(--grey);
+      padding-top: 68px;
+      padding-bottom: 112px;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 44px), 0 100%);
+    }
+    #about h2 { color: var(--dark); }
+    #about p { margin: 0 0 14px; max-width: 70ch; color: #2A2E45; }
+    #about p:last-child { margin-bottom: 0; }
+
+    /* Keywords: black band */
+    #keywords { padding-top: 8px; padding-bottom: 80px; }
+    .keys { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    .chip {
+      padding: 9px 22px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .chip:hover { transform: translateY(-4px); border-color: var(--c1); box-shadow: 0 8px 28px rgba(0, 210, 232, .35); }
+
+    /* ===== PHONE ===== */
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: 0; }
+      .hero::before { display: none; }
+      .topbar { grid-column: 1; background: var(--grey); padding: 16px 20px 0; }
+      .menu { font-size: .8rem; gap: 2px; }
+      .menu a { padding: 6px 9px; color: var(--dark); }
+      .menu a:hover { background: rgba(0, 0, 0, .08); }
+      .menu a.active, .menu a.active:hover { background: var(--dark); color: #fff; }
+      .hero-text { grid-column: 1; grid-row: 2; background: var(--grey); padding: 26px 20px 30px; }
+      .role { min-height: 6.6em; font-size: 1.1rem; }
+      .photo-wrap { grid-column: 1; grid-row: 3; }
+      .hero-photo { min-height: 380px; clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%); }
+      .hero-photo::after { display: none; }
+    }
+    @media (max-width: 480px) { .logo { display: none; } .menu { font-size: .78rem; } }
+
+    /* People who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      h1, h2::after, .caret { animation: none; }
+      .rise { animation: none; opacity: 1; transform: none; }
+      .chip { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO (top part) ===== -->
+  <header class="hero">
+
+    <!-- Top bar: logo + navigation (same nav goes on every page) -->
+    <div class="topbar rise" style="--d:.05s">
+      <div class="logo" aria-hidden="true">CG</div>
+      <nav class="menu" aria-label="Main">
+        <a class="active" href="home.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="project.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Left side: name + typing tagline -->
+    <div class="hero-text">
+      <p class="hi rise" style="--d:.2s">Hi, I am</p>
+      <h1 class="rise" style="--d:.3s">CHANDRAKAR PARSAD GAUTAM</h1>
+      <p class="role rise" style="--d:.45s">
+        <!-- Full text for screen readers; the animated one is below -->
+        <span class="sr">A data analyst who trusts numbers, not guesses. Because if the data can’t tell the story, what will?</span>
+        <span id="type" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>
+      </p>
+    </div>
+
+    <!-- Right side: photo -->
+    <div class="photo-wrap rise" style="--d:.35s">
+      <div class="hero-photo">
+        <img src="WhatsApp Image 2026-11-20 at 16.37.20 (1).jpeg" alt="Portrait of Chandrakar Parsad Gautam">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== ABOUT ME ===== -->
+    <section class="band rise" id="about" style="--d:.6s" aria-labelledby="about-h">
+      <h2 id="about-h">About me</h2>
+      <p>My name is Chandrakar Parsad Gautam, and I am an aspiring data analyst. My interest in data began with a simple question: how do organisations decide what to do next? I soon realised that behind almost every good decision there is data that someone has taken the time to understand.</p>
+      <p>That curiosity led me to learn data analytics from the ground up. I am building my skills in Excel, SQL, Python and Power BI, and I practise on real datasets so that what I learn is not just theory but something I can apply.</p>
+      <p>I approach every project with patience and attention to detail. I would rather check a number twice than present a wrong conclusion, and I enjoy turning a messy spreadsheet into a clear answer that anyone can understand.</p>
+      <p>My process is simple. I start by understanding the question, then I clean the data, look for patterns, and finally present the findings in a way that a non-technical person can use. I believe an analysis is only useful when someone can act on it.</p>
+      <p>Right now I am practising Excel for data cleaning and pivot tables, SQL for querying databases, Python for deeper analysis, and Power BI for dashboards. Each tool teaches me something new, and I try to build a small project with everything I learn.</p>
+      <p>Beyond the technical side, I value honesty with data. I would rather say “the data does not show this” than force a conclusion. I also like explaining my work in simple words, because good analysis should be understood by everyone, not only by analysts.</p>
+      <p>I am always open to learning, feedback and new opportunities.</p>
+    </section>
+
+    <!-- ===== KEYWORDS ===== -->
+    <section class="band rise" id="keywords" style="--d:1s" aria-labelledby="kw-h">
+      <h2 id="kw-h">A few keywords that define me</h2>
+      <ul class="keys" aria-label="Keywords">
+        <li class="chip rise" style="--d:1.2s">Passionate</li>
+        <li class="chip rise" style="--d:1.3s">Meticulous</li>
+        <li class="chip rise" style="--d:1.4s">Curious</li>
+        <li class="chip rise" style="--d:1.5s">Analytical</li>
+        <li class="chip rise" style="--d:1.6s">Disciplined</li>
+        <li class="chip rise" style="--d:1.7s">Problem Solver</li>
+        <li class="chip rise" style="--d:1.8s">Consistent</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Typing animation for the tagline: type -> pause -> erase -> type again
+    (function () {
+      var el = document.getElementById('type');
+      if (!el) return;
+
+      var text = 'A data analyst who trusts numbers, not guesses. Because if the data can’t tell the story, what will?';
+
+      // If the visitor prefers less motion, just show the full text
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = text;
+        return;
+      }
+
+      var i = 0;      // how many letters are showing
+      var dir = 1;    // 1 = typing, -1 = erasing
+
+      function tick() {
+        i += dir;
+        el.textContent = text.slice(0, i);
+
+        var delay = dir > 0 ? 55 : 22;               // typing speed / erasing speed (ms)
+        if (dir > 0 && i === text.length) { dir = -1; delay = 2200; }   // full text: wait, then erase
+        else if (dir < 0 && i === 0)      { dir = 1;  delay = 700;  }   // empty: wait, then type again
+        setTimeout(tick, delay);
+      }
+
+      setTimeout(tick, 900);
+    })();
+  </script>
+</body>
+</html>

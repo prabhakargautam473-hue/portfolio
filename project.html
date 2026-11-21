@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects – Chandrakar Parsad Gautam</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Colours and basics (same as other pages) ===== */
+    :root {
+      --ink: #F1F3FF;
+      --grey: #D2D2D2;
+      --dark: #0A0C1C;
+      --line: rgba(255, 255, 255, .14);
+      --c1: #00D2E8;
+      --c2: #3446E0;
+      --c3: #8E2BE6;
+      --c4: #E3208C;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #000; }
+    html { scroll-behavior: smooth; }
+    body {
+      color: var(--ink);
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .rise {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      grid-template-rows: auto 1fr;
+      min-height: 520px;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--grey);
+      clip-path: polygon(0 0, 58% 0, 50.4% 100%, 0 100%);
+    }
+    .topbar {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px max(20px, calc((100% - 1180px) / 2 + 20px)) 0;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      font-weight: 700; letter-spacing: .04em; color: #fff;
+      background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+    }
+    .menu { display: flex; align-items: center; gap: 6px; font-size: .92rem; }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      transition: background .2s, color .2s;
+    }
+    .menu a:hover { background: rgba(255, 255, 255, .18); }
+    .menu a.active { background: #fff; color: var(--dark); font-weight: 600; }
+    .menu a.active:hover { background: var(--c1); }
+    .menu a:focus-visible { outline: 3px solid var(--c2); outline-offset: 3px; }
+
+    .hero-text {
+      grid-column: 1;
+      grid-row: 2;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 24px 48px max(20px, calc((100vw - 1180px) / 2 + 20px));
+    }
+    .hi { margin: 0 0 8px; font-size: 1.15rem; color: #3C4156; }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      letter-spacing: .06em;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--dark), var(--c2), var(--c3), var(--dark));
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 7s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 250% 0; } }
+    .role { margin: 16px 0 0; max-width: 28em; font-size: 1.15rem; line-height: 1.5; color: #2A2E45; }
+
+    .stats {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      padding: 84px 24px 36px 9vw;
+    }
+    .stat { border-left: 3px solid var(--c1); padding-left: 18px; }
+    .num {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .lbl { color: #C5CAEA; font-size: .98rem; line-height: 1.4; }
+
+    /* ===== PROJECT SECTIONS ===== */
+    .band { padding: 72px max(20px, calc((100% - 1040px) / 2 + 20px)); }
+    .band.grey {
+      background: var(--grey);
+      color: #2A2E45;
+      padding-top: 104px;
+      padding-bottom: 104px;
+      clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+    }
+
+    .proj-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .shot {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, .35);
+    }
+    .grey .shot { border-color: rgba(10, 12, 28, .2); box-shadow: 0 16px 44px rgba(10, 12, 28, .25); }
+    .shot img { display: block; width: 100%; height: auto; aspect-ratio: 600 / 340; }
+
+    .date { margin: 0 0 4px; font-weight: 600; font-size: .9rem; letter-spacing: .12em; color: var(--c1); }
+    .grey .date { color: var(--c2); }
+    h2 { margin: 0 0 12px; font-size: 2rem; font-weight: 600; line-height: 1.2; }
+    .grey h2 { color: var(--dark); }
+    h2::after {
+      content: "";
+      display: block;
+      width: 64px; height: 4px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+    }
+    .proj-text p { margin: 0 0 14px; max-width: 62ch; }
+    .proj-text h3 { margin: 18px 0 8px; font-size: 1.05rem; font-weight: 600; }
+    .proj-text ul.points { margin: 0 0 14px; padding-left: 20px; }
+    .proj-text ul.points li { margin-bottom: 6px; }
+
+    .tags { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li { font-size: .84rem; padding: 2px 13px; border: 1px solid var(--line); border-radius: 99px; color: #C5CAEA; }
+    .grey .tags li { border-color: rgba(10, 12, 28, .3); color: #2A2E45; }
+
+    /* the two buttons */
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background .2s, color .2s, transform .25s, border-color .2s;
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:focus-visible { outline: 3px solid var(--c1); outline-offset: 3px; }
+    /* on black bands */
+    .btn.fill { background: #fff; color: var(--dark); }
+    .btn.fill:hover { background: var(--c1); }
+    .btn.line { border-color: rgba(255, 255, 255, .6); color: #fff; }
+    .btn.line:hover { border-color: var(--c1); color: var(--c1); }
+    /* on grey bands */
+    .grey .btn.fill { background: var(--dark); color: #fff; }
+    .grey .btn.fill:hover { background: var(--c2); }
+    .grey .btn.line { border-color: rgba(10, 12, 28, .55); color: var(--dark); }
+    .grey .btn.line:hover { border-color: var(--c2); color: var(--c2); }
+    /* link not added yet: shown dimmed (set by the small script at the bottom) */
+    .btn.soon { opacity: .5; cursor: not-allowed; }
+    .btn.soon:hover { transform: none; }
+
+    /* ===== PHONE ===== */
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: 0; }
+      .hero::before { display: none; }
+      .topbar { grid-column: 1; background: var(--grey); padding: 16px 20px 0; }
+      .menu { font-size: .8rem; gap: 2px; }
+      .menu a { padding: 6px 9px; color: var(--dark); }
+      .menu a:hover { background: rgba(0, 0, 0, .08); }
+      .menu a.active, .menu a.active:hover { background: var(--dark); color: #fff; }
+      .hero-text { grid-column: 1; grid-row: 2; background: var(--grey); padding: 26px 20px 34px; }
+      .stats { grid-column: 1; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 14px; padding: 34px 20px; }
+      .stat:last-child { grid-column: 1 / -1; }
+      .proj-grid { grid-template-columns: 1fr; gap: 26px; }
+      .band.grey { padding-top: 88px; padding-bottom: 88px; }
+    }
+    @media (max-width: 480px) { .logo { display: none; } .menu { font-size: .78rem; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1 { animation: none; }
+      html { scroll-behavior: auto; }
+      .rise { animation: none; opacity: 1; transform: none; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="topbar rise" style="--d:.05s">
+      <div class="logo" aria-hidden="true">CG</div>
+      <nav class="menu" aria-label="Main">
+        <a href="home.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="hero-text">
+      <p class="hi rise" style="--d:.2s">Chandrakar Parsad Gautam</p>
+      <h1 class="rise" style="--d:.3s">PROJECTS</h1>
+      <p class="role rise" style="--d:.45s">Things I have built with Python and data, with code and live demos.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat rise" style="--d:.4s"><div class="num">5</div><div class="lbl">Projects built in 2026</div></div>
+      <div class="stat rise" style="--d:.55s"><div class="num">Flask · Streamlit · Dash</div><div class="lbl">Frameworks used</div></div>
+      <div class="stat rise" style="--d:.7s"><div class="num">GitHub + Live</div><div class="lbl">Code and working demos</div></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== 1. NLP WEB SERVICE (grey) ===== -->
+    <section class="band grey" id="nlp" aria-labelledby="nlp-h">
+      <div class="proj-grid">
+        <div class="shot"><img src="nlp_image.jpeg" alt="Text analysis with named entities, sentiment gauge and abuse detection"></div>
+        <div class="proj-text">
+          <p class="date">2026</p>
+          <h2 id="nlp-h">NLP Web Service</h2>
+          <p>A web service where anyone can run text analysis in one place. It brings Named Entity Recognition (NER), sentiment analysis and abuse detection together, using external APIs behind the scenes, so the user never has to create an API key of their own.</p>
+          <h3>What it does</h3>
+          <ul class="points">
+            <li><b>NER:</b> finds names, places and organisations in text.</li>
+            <li><b>Sentiment analysis:</b> tells whether the text feels positive, negative or neutral.</li>
+            <li><b>Abuse detection:</b> flags abusive language.</li>
+            <li>User register and login.</li>
+            <li>Every user’s history is stored, so they can look at past analyses.</li>
+            <li>No API key needed: paste text and get the result directly.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>NLP</li><li>API Integration</li><li>Login &amp; History</li></ul>
+          <div class="actions">
+            <!-- Replace each # with your real link -->
+            <a class="btn fill" href="https://github.com/prabhakargautam473-hue/NLP-WEB-APP"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub link</a>
+            <a class="btn line" href="https://nlp-web-app-s0is.onrender.com"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>Try at playground</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. IPL API WEB SERVICE (black) ===== -->
+    <section class="band" id="ipl" aria-labelledby="ipl-h">
+      <div class="proj-grid">
+        <div class="shot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpI-Lk6ldP3VNUAas8bp00Q0HZG52wAdI9MbaF33yrgw&s=10" alt="Cricket ball and bat with a bar chart for IPL data APIs"></div>
+        <div class="proj-text">
+          <p class="date">2026</p>
+          <h2 id="ipl-h">IPL API Web Service</h2>
+          <p>A set of 11 APIs built on an IPL dataset, covering things like comparisons and records, so anyone can analyse cricket data through simple API calls. The APIs are wrapped in a website where users sign up and get their own key.</p>
+          <h3>What it does</h3>
+          <ul class="points">
+            <li>11 APIs on the IPL dataset (for example comparisons and records).</li>
+            <li>A website with user register and login.</li>
+            <li>Each user can generate their own API key.</li>
+            <li>With the key, users call the APIs and analyse cricket data.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>Flask</li><li>REST APIs</li><li>API Keys</li></ul>
+          <div class="actions">
+            <a class="btn fill" href="https://github.com/prabhakargautam473-hue/cricpulse-api"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub link</a>
+            <a class="btn line" href="https://cricpulse-api-app.onrender.com"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>Try at playground</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. STARTUP FUNDING ANALYSIS (grey) ===== -->
+    <section class="band grey" id="startup" aria-labelledby="startup-h">
+      <div class="proj-grid">
+        <div class="shot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiYm5OBA4_Dn1jkewMJRkJf9RGN-2na8Rv-NS31MbCIg&s=10" alt="Rising bars, growth arrow and coins for startup funding analysis"></div>
+        <div class="proj-text">
+          <p class="date">2026</p>
+          <h2 id="startup-h">Startup Funding Analysis</h2>
+          <p>A Streamlit website that analyses a startup funding dataset. It has two views, one for investors and one for startups, and users can register and log in.</p>
+          <h3>What it does</h3>
+          <ul class="points">
+            <li><b>Investor analysis:</b> explore funding data from the investor’s side.</li>
+            <li><b>Startup analysis:</b> explore funding data from the startup’s side.</li>
+            <li>User register and login.</li>
+          </ul>
+          <ul class="tags"><li>Streamlit</li><li>Pandas</li><li>Data Analysis</li><li>Login</li></ul>
+          <div class="actions">
+            <a class="btn fill" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub link</a>
+            <a class="btn line" href="#"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>Try at playground</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. COVID-19 DASHBOARD (black) ===== -->
+    <section class="band" id="covid" aria-labelledby="covid-h">
+      <div class="proj-grid">
+        <div class="shot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLmEbsuIIyODbyn280sk8XmVxtXQu6rbVyAzGbyVbZA&s=10" alt="Line chart and pie chart for a COVID-19 dashboard"></div>
+        <div class="proj-text">
+          <p class="date">2026</p>
+          <h2 id="covid-h">COVID-19 Dashboard</h2>
+          <p>A simple dashboard built with Dash that analyses the COVID-19 dataset through graphs and pie charts.</p>
+          <h3>What it does</h3>
+          <ul class="points">
+            <li>Shows COVID-19 trends in graphs.</li>
+            <li>Shows breakdowns in pie charts.</li>
+            <li>Built with Dash, in a clean and simple layout.</li>
+          </ul>
+          <ul class="tags"><li>Dash</li><li>Plotly</li><li>Data Visualization</li></ul>
+          <div class="actions">
+            <a class="btn fill" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub link</a>
+            <a class="btn line" href="#"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>Try at playground</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. FLIPKART WEB SCRAPING (grey) ===== -->
+    <section class="band grey" id="scraping" aria-labelledby="scraping-h">
+      <div class="proj-grid">
+        <div class="shot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOsGSAzJiV6XmtmeemzoH9WqA2JS0tjL3gabziv5Wig&s=10" alt="A shopping web page being scraped into a data table"></div>
+        <div class="proj-text">
+          <p class="date">2026</p>
+          <h2 id="scraping-h">Flipkart Web Scraping</h2>
+          <p>After learning web scraping, I collected product data from the Flipkart website and built a dataset from it. It was my first project in data gathering.</p>
+          <h3>What it does</h3>
+          <ul class="points">
+            <li>Scrapes product data from the Flipkart website.</li>
+            <li>Organises the scraped data into a dataset.</li>
+            <li>The dataset is ready for cleaning and analysis.</li>
+          </ul>
+          <ul class="tags"><li>Python</li><li>Web Scraping</li><li>Data Gathering</li></ul>
+          <div class="actions">
+            <a class="btn fill" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub link</a>
+            <a class="btn line" href="#"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>Try at playground</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Any button whose link is still "#" is shown dimmed and does nothing.
+    // When you put a real link in href, the button works normally.
+    document.querySelectorAll('a.btn[href="#"]').forEach(function (a) {
+      a.classList.add('soon');
+      a.title = 'Link coming soon';
+      a.setAttribute('aria-disabled', 'true');
+      a.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+  </script>
+</body>
+</html>

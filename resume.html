@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume – Chandrakar Parsad Gautam</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Colours and basics (same as home page) ===== */
+    :root {
+      --ink: #F1F3FF;
+      --grey: #D2D2D2;
+      --dark: #0A0C1C;
+      --panel: #11152B;
+      --line: rgba(255, 255, 255, .14);
+      --c1: #00D2E8;
+      --c2: #3446E0;
+      --c3: #8E2BE6;
+      --c4: #E3208C;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; background: #000; }
+    body {
+      color: var(--ink);
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== Page-load animation ===== */
+    .rise {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ===== HERO: grey left, black right, diagonal edge ===== */
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      grid-template-rows: auto 1fr;
+      min-height: 560px;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--grey);
+      clip-path: polygon(0 0, 58% 0, 50.4% 100%, 0 100%);
+    }
+
+    /* top bar + navigation */
+    .topbar {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px max(20px, calc((100% - 1180px) / 2 + 20px)) 0;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      font-weight: 700; letter-spacing: .04em; color: #fff;
+      background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+    }
+    .menu { display: flex; align-items: center; gap: 6px; font-size: .92rem; }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      transition: background .2s, color .2s;
+    }
+    .menu a:hover { background: rgba(255, 255, 255, .18); }
+    .menu a.active { background: #fff; color: var(--dark); font-weight: 600; }
+    .menu a.active:hover { background: var(--c1); }
+    .menu a:focus-visible { outline: 3px solid var(--c2); outline-offset: 3px; }
+
+    /* left text */
+    .hero-text {
+      grid-column: 1;
+      grid-row: 2;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 24px 48px max(20px, calc((100vw - 1180px) / 2 + 20px));
+    }
+    .hi { margin: 0 0 8px; font-size: 1.15rem; color: #3C4156; }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      letter-spacing: .06em;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--dark), var(--c2), var(--c3), var(--dark));
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 7s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 250% 0; } }
+    .role { margin: 16px 0 0; max-width: 28em; font-size: 1.15rem; line-height: 1.5; color: #2A2E45; }
+
+    /* download resume button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      align-self: flex-start;
+      margin-top: 22px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      background: var(--dark);
+      color: #fff;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .25s;
+    }
+    .btn:hover { background: var(--c2); transform: translateY(-3px); }
+    .btn:focus-visible { outline: 3px solid var(--c2); outline-offset: 3px; }
+    .btn svg { width: 18px; height: 18px; }
+
+    /* right side: key points on black */
+    .stats {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      padding: 84px 24px 36px 9vw;
+    }
+    .stat { border-left: 3px solid var(--c1); padding-left: 18px; }
+    .num {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    .lbl { color: #C5CAEA; font-size: .98rem; line-height: 1.4; }
+
+    /* ===== SECTIONS ===== */
+    .band {
+      padding: 64px max(20px, calc((100% - 1040px) / 2 + 20px));
+    }
+    .band.grey {
+      background: var(--grey);
+      color: #2A2E45;
+      padding-top: 100px;
+      padding-bottom: 100px;
+      clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+    }
+    h2 { margin: 0 0 14px; font-size: 1.9rem; font-weight: 600; }
+    h2.second { margin-top: 56px; }
+    h2::after {
+      content: "";
+      display: block;
+      width: 64px; height: 4px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+      animation: grow 1.2s .9s both cubic-bezier(.2, .7, .2, 1);
+    }
+    @keyframes grow { from { width: 0; } to { width: 64px; } }
+    .grey h2 { color: var(--dark); }
+    p { margin: 0 0 14px; max-width: 70ch; }
+
+    /* "what I'm looking for" box */
+    .seeking {
+      margin-top: 26px;
+      padding: 18px 22px;
+      max-width: 70ch;
+      border: 2px solid var(--dark);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .5);
+    }
+    .seeking strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .8rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--c2);
+    }
+    .seeking p { margin: 0; }
+
+    /* cards (projects + achievements, black band) */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(17, 21, 43, .72);
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .card.static-card { cursor: default; }
+    .card:hover { transform: translateY(-4px); border-color: var(--c1); box-shadow: 0 8px 28px rgba(0, 210, 232, .3); }
+
+    /* Larger, better-framed card images so portrait/diagram content isn't cramped or blurry */
+    .card-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  padding: 8px;
+  background: #0b0f22;
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 20px 22px 22px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 1.22rem; font-weight: 600; line-height: 1.3; }
+    .card p { color: #C5CAEA; font-size: .96rem; margin-bottom: 10px; }
+    .tags { list-style: none; padding: 0; margin: 10px 0 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags li { font-size: .82rem; padding: 3px 12px; border: 1px solid var(--line); border-radius: 99px; color: #C5CAEA; }
+    .doc-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--c1);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    /* ===== FULL DOCUMENTATION PAGE / MODAL OVERLAY ===== */
+    .doc-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(4, 6, 15, .92);
+      backdrop-filter: blur(8px);
+      overflow-y: auto;
+      padding: 28px 18px 60px;
+      display: none;
+    }
+    .doc-modal.open { display: block; }
+    .doc-container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid rgba(0, 210, 232, .35);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, .75);
+    }
+    .doc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(10, 12, 28, .85);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+    .doc-badge {
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--c1);
+      font-weight: 700;
+    }
+    .doc-close {
+      background: rgba(255, 255, 255, .1);
+      color: #fff;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 7px 16px;
+      font-family: inherit;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .doc-close:hover { background: var(--c4); border-color: var(--c4); }
+    .doc-hero-img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-bottom: 1px solid var(--line);
+      background: #090d1e;
+    }
+    .doc-content { padding: 26px 28px 34px; }
+    .doc-content h2 { font-size: 2rem; margin-bottom: 8px; }
+    .doc-content h3 {
+      margin: 24px 0 8px;
+      font-size: 1.22rem;
+      color: var(--c1);
+    }
+    .doc-content ul {
+      margin: 8px 0 14px;
+      padding-left: 22px;
+      color: #DCE1FF;
+    }
+    .doc-content li { margin-bottom: 6px; }
+    .doc-code {
+      background: #070914;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: .88rem;
+      color: #9BF6FF;
+      overflow-x: auto;
+      white-space: pre;
+      margin: 10px 0 16px;
+    }
+    .doc-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .doc-pill {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .05);
+      color: var(--ink);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: .85rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .doc-pill:hover, .doc-pill.active {
+      background: var(--c2);
+      border-color: var(--c1);
+      color: #fff;
+    }
+
+    /* experience + education entries (grey band) */
+    .entry { border-left: 4px solid var(--c2); padding: 2px 0 2px 20px; margin-top: 24px; }
+    .entry h3 { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--dark); }
+    .entry .org { margin: 2px 0 10px; font-weight: 600; color: var(--c2); }
+    .entry ul { margin: 0; padding-left: 20px; max-width: 70ch; }
+    .entry li { margin-bottom: 8px; }
+
+    /* skills */
+    .skill-group { margin-top: 24px; }
+    .skill-group h3 { margin: 0; font-size: 1.1rem; font-weight: 600; color: var(--c1); }
+    .keys { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 12px; }
+    .chip {
+      padding: 8px 20px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .chip:hover { transform: translateY(-4px); border-color: var(--c1); box-shadow: 0 8px 28px rgba(0, 210, 232, .35); }
+    .grey .skill-group h3 { color: var(--c2); }
+    .grey .chip { border-color: rgba(10, 12, 28, .3); }
+    .grey .chip:hover { border-color: var(--c2); box-shadow: 0 8px 24px rgba(52, 70, 224, .3); }
+
+    /* ===== PHONE ===== */
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: 0; }
+      .hero::before { display: none; }
+      .topbar { grid-column: 1; background: var(--grey); padding: 16px 20px 0; }
+      .menu { font-size: .8rem; gap: 2px; }
+      .menu a { padding: 6px 9px; color: var(--dark); }
+      .menu a:hover { background: rgba(0, 0, 0, .08); }
+      .menu a.active, .menu a.active:hover { background: var(--dark); color: #fff; }
+      .hero-text { grid-column: 1; grid-row: 2; background: var(--grey); padding: 26px 20px 34px; }
+      .stats { grid-column: 1; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 14px; padding: 34px 20px; }
+      .stat:last-child { grid-column: 1 / -1; }
+      .band.grey { padding-top: 84px; padding-bottom: 84px; }
+      .card-media { min-height: 200px; max-height: 240px; }
+      .doc-content { padding: 20px 18px 28px; }
+    }
+    @media (max-width: 480px) { .logo { display: none; } .menu { font-size: .78rem; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1, h2::after { animation: none; }
+      .rise { animation: none; opacity: 1; transform: none; }
+      .card, .chip, .btn, .doc-close, .doc-pill { transition: none; }
+    }
+    <img src="nlp_image.jpeg" height="714" width="1280"/></style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="topbar rise" style="--d:.05s">
+      <div class="logo" aria-hidden="true">CG</div>
+      <nav class="menu" aria-label="Main">
+        <a href="home.html">Home</a>
+        <a class="active" href="resume.html">Resume</a>
+        <a href="project.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="hero-text">
+      <p class="hi rise" style="--d:.2s">Chandrakar Parsad Gautam</p>
+      <h1 class="rise" style="--d:.3s">RESUME</h1>
+      <p class="role rise" style="--d:.45s">Engineering Student | Python &amp; Data Analytics | Mentor</p>
+
+      <!-- Put your PDF in the same folder as this file with this exact name -->
+      <a class="btn rise" style="--d:.55s" href="Chandrakar_Gautam_Resume.pdf" download>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10M6 9.5l4 4 4-4M4 17h12"/></svg>
+        Download resume
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat rise" style="--d:.4s"><div class="num">AIR 428</div><div class="lbl">NDA 2 2025 merit list</div></div>
+      <div class="stat rise" style="--d:.5s"><div class="num">3×</div><div class="lbl">Cleared the NDA written exam</div></div>
+      <div class="stat rise" style="--d:.6s"><div class="num">SSC GD</div><div class="lbl">Examination cleared</div></div>
+      <div class="stat rise" style="--d:.7s"><div class="num">Debates &amp; GD</div><div class="lbl">Won several debates and group discussions</div></div>
+      <div class="stat rise" style="--d:.8s"><div class="num">Data Science</div><div class="lbl">Eager to learn more in this domain</div></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== PROFESSIONAL SUMMARY ===== -->
+    <section class="band grey" aria-labelledby="sum-h">
+      <h2 id="sum-h">Professional summary</h2>
+      <p>B.Tech student at Oriental College of Technology, Bhopal, with hands-on skills in Python for data work. I use NumPy and Pandas for data gathering, cleaning and wrangling, and Matplotlib, Seaborn and Plotly to turn data into clear visuals.</p>
+      <p>I build REST APIs with Flask and interactive apps with Streamlit, and I use Git and GitHub to manage my code. I have built five projects so far, including API web services, a Streamlit app and a Dash dashboard.</p>
+      <p>Beyond tech, I bring leadership and communication skills: All India Rank 428 in NDA, SSC GD cleared, several debate and group discussion wins, and hundreds of students mentored on the Roar NDA platform.</p>
+
+      <div class="seeking">
+        <strong>What I’m looking for</strong>
+        <p>A data analytics internship where I can apply my Python, Pandas and visualization skills and learn more about data science.</p>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="band" aria-labelledby="proj-h">
+      <h2 id="proj-h">Projects</h2>
+      <div class="cards">
+
+        <article class="card" role="button" tabindex="0" data-doc="nlp" aria-label="Open documentation for NLP Web Service">
+          <img class="card-media" src="nlp_image.jpeg" alt="Natural language processing pipeline diagram for text analysis" loading="lazy">
+          <div class="card-body">
+            <h3>NLP Web Service</h3>
+            <p>A website for text analysis with Named Entity Recognition (NER), sentiment analysis and abuse detection, built on external APIs.</p>
+            <p>Users register, log in and analyse text directly, with no API key needed. Their history is stored so they can look at it again.</p>
+            <ul class="tags"><li>Python</li><li>NLP</li><li>API Integration</li><li>Login &amp; History</li></ul>
+            <span class="doc-cta">Read Documentation →</span>
+          </div>
+        </article>
+
+        <article class="card" role="button" tabindex="0" data-doc="ipl" aria-label="Open documentation for IPL API Web Service">
+          <img class="card-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR83FTjY0b_wp5CgsP8PW3G1gZh_lh4S3kCYdcTkSFHUA&s=10" alt="Cricket match scoreboard display" loading="lazy">
+          <div class="card-body">
+            <h3>IPL API Web Service</h3>
+            <p>11 APIs built on an IPL dataset, such as comparisons and records, for cricket data analysis.</p>
+            <p>Integrated into a website where users register, log in, generate their own API key and use the APIs for analysis.</p>
+            <ul class="tags"><li>Python</li><li>Flask</li><li>REST APIs</li><li>API Keys</li></ul>
+            <span class="doc-cta">Read Documentation →</span>
+          </div>
+        </article>
+
+        <article class="card" role="button" tabindex="0" data-doc="startup" aria-label="Open documentation for Startup Funding Analysis">
+          <img class="card-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqbLCkvq_WnlHdzoihoyspi1iuyBJ3ve4LAMz7aqxRCw&s=10" alt="startup funding analysis" loading="lazy">
+          <div class="card-body">
+            <h3>Startup Funding Analysis</h3>
+            <p>A Streamlit website that analyses a startup funding dataset, with separate investor analysis and startup analysis.</p>
+            <p>Includes user register and login.</p>
+            <ul class="tags"><li>Streamlit</li><li>Pandas</li><li>Data Analysis</li><li>Login</li></ul>
+            <span class="doc-cta">Read Documentation →</span>
+          </div>
+        </article>
+
+        <article class="card" role="button" tabindex="0" data-doc="covid" aria-label="Open documentation for COVID-19 Dashboard">
+          <img class="card-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1b6Oqlsq8-VVX56ST15HZY9b2XPFo5Vfx6m-hdjSqmwU6ce-u2q-m-qcz&s=10" alt="COVID-19 dashboard analytics chart and graphs" loading="lazy">
+          <div class="card-body">
+            <h3>COVID-19 Dashboard</h3>
+            <p>A simple dashboard built with Dash to analyse the COVID-19 dataset using graphs and pie charts.</p>
+            <ul class="tags"><li>Dash</li><li>Plotly</li><li>Data Visualization</li></ul>
+            <span class="doc-cta">Read Documentation →</span>
+          </div>
+        </article>
+
+        <article class="card" role="button" tabindex="0" data-doc="scraping" aria-label="Open documentation for Flipkart Web Scraping">
+          <img class="card-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ4k6uIxyV7T87gJL-Mc2IgMAfaj03u9Y5VRu2kdIXPA&s=10" alt="Python web scraping and data extraction screen" loading="lazy">
+          <div class="card-body">
+            <h3>Flipkart Web Scraping</h3>
+            <p>Scraped product data from the Flipkart website and built a dataset from it.</p>
+            <ul class="tags"><li>Python</li><li>Web Scraping</li><li>Data Gathering</li></ul>
+            <span class="doc-cta">Read Documentation →</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="band grey" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+
+      <div class="skill-group">
+        <h3>Programming</h3>
+        <ul class="keys"><li class="chip">Python</li></ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Data analysis</h3>
+        <ul class="keys">
+          <li class="chip">NumPy</li>
+          <li class="chip">Pandas</li>
+          <li class="chip">Data Gathering</li>
+          <li class="chip">Web Scraping</li>
+          <li class="chip">Data Cleaning (Data Wrangling)</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Data visualization</h3>
+        <ul class="keys">
+          <li class="chip">Matplotlib</li>
+          <li class="chip">Seaborn</li>
+          <li class="chip">Plotly</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Apps &amp; APIs</h3>
+        <ul class="keys">
+          <li class="chip">REST API Development (Flask)</li>
+          <li class="chip">Streamlit</li>
+          <li class="chip">Dash</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Tools</h3>
+        <ul class="keys">
+          <li class="chip">Git</li>
+          <li class="chip">GitHub</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Communication &amp; leadership</h3>
+        <ul class="keys">
+          <li class="chip">Public Speaking</li>
+          <li class="chip">Mentorship</li>
+          <li class="chip">Team Coordination</li>
+          <li class="chip">Problem Solving</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== KEY ACHIEVEMENTS ===== -->
+    <section class="band" aria-labelledby="ach-h">
+      <h2 id="ach-h">Key achievements</h2>
+      <div class="cards">
+        <article class="card static-card">
+          <div class="card-body">
+            <h3>National Defence Academy (NDA 2 2025) – AIR 428</h3>
+            <p>Secured All India Rank 428 in the highly competitive NDA merit list.</p>
+            <p>Cleared the NDA written examination three times across different cycles, showing consistent academic and analytical strength.</p>
+          </div>
+        </article>
+        <article class="card static-card">
+          <div class="card-body">
+            <h3>SSC GD &amp; Defence Selections</h3>
+            <p>Cleared the SSC GD examination, showing strong aptitude, discipline and competitive capability.</p>
+            <p>Recommended by the Services Selection Board (1 AFSB Dehradun) after a multi-day assessment of leadership, psychological aptitude and group dynamics.</p>
+          </div>
+        </article>
+        <article class="card static-card">
+          <div class="card-body">
+            <h3>Extracurricular &amp; Competitions</h3>
+            <p>Took part in college hackathons, building technical solutions while working in a team.</p>
+            <p>Won several debate competitions and group discussions, and took part in Mock Parliament sessions, building strong public speaking and persuasive communication skills.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE & EDUCATION ===== -->
+    <section class="band grey" aria-labelledby="exp-h">
+      <h2 id="exp-h">Teaching &amp; leadership experience</h2>
+      <div class="entry">
+        <h3>Educator &amp; Mentor</h3>
+        <p class="org">Roar NDA Platform</p>
+        <ul>
+          <li>Guided and mentored hundreds of students preparing for the National Defence Academy (NDA) entrance examinations.</li>
+          <li>Taught core subjects, built study plans and used public speaking skills to run live sessions and mentoring workshops.</li>
+          <li>Tracked student performance tiers, improving concept clarity, consistency and mock test results.</li>
+        </ul>
+      </div>
+
+      <h2 class="second" id="edu-h">Education</h2>
+      <div class="entry">
+        <h3>Bachelor of Technology (B.Tech)</h3>
+        <p class="org">Oriental College of Technology, Bhopal, Madhya Pradesh</p>
+        <p>Pursuing an undergraduate engineering degree with a focus on technical concepts, programming, hackathons and analytical problem-solving.</p>
+      </div>
+      <div class="entry">
+        <h3>Schooling (Higher Secondary / Secondary)</h3>
+        <p class="org">RPS Public School, Satna, Madhya Pradesh</p>
+        <p>Completed school education with a strong emphasis on Mathematics and Sciences.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PROJECT DOCUMENTATION VIEWER ===== -->
+  <div class="doc-modal" id="docModal" role="dialog" aria-modal="true" aria-labelledby="docTitle">
+    <div class="doc-container">
+      <div class="doc-top">
+        <div>
+          <div class="doc-badge">Project Documentation</div>
+          <div class="doc-switch" id="docSwitch"></div>
+        </div>
+        <button type="button" class="doc-close" id="docClose">Close ✕</button>
+      </div>
+      <img class="doc-hero-img" id="docImg" src="" alt="">
+      <div class="doc-content" id="docBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const PROJECT_DOCS = {
+      nlp: {
+        title: "NLP Web Service — Technical Documentation",
+        img: "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcT05IUUzBC2gHwsz32Rpv9rrOoKleQvfw4NwpN18T7RjDb2pN_CAdA7_jkl8PW0k_pkzA8WyIlHq-d83QE",
+        alt: "Natural language processing pipeline diagram for text analysis",
+        overview: "A full-featured Natural Language Processing (NLP) web application that processes raw user text to extract entities, classify sentiment, and flag abusive or toxic language—without requiring end users to manage external API keys.",
+        architecture: [
+          "Frontend & Routing: Server-rendered templates and form/AJAX workflows served through a Python web backend.",
+          "Authentication & Session Layer: User registration, login verification, and session handling so each user accesses their own analysis history.",
+          "NLP Inference Pipeline: Sends sanitized text payloads to NLP models/APIs for Named Entity Recognition (NER), sentiment scoring, and abuse detection.",
+          "History Persistence: Stores submitted text, task type, output labels, and timestamps per authenticated user."
+        ],
+        workflow: [
+          "1. User registers or logs into their account.",
+          "2. User selects an analysis mode (NER, Sentiment Analysis, or Abuse Detection) and enters text.",
+          "3. Backend validates input, calls the underlying NLP service, and formats structured results.",
+          "4. Output is displayed immediately and saved to user history for later review."
+        ],
+        sampleCode: `POST /api/analyze
+Content-Type: application/json
+
+{
+  "task": "sentiment_and_ner",
+  "text": "Chandrakar presented the analytics prototype in Bhopal with great results."
+}`,
+        outcomes: [
+          "Eliminates friction for non-technical users by handling API credentials server-side.",
+          "Combines multiple text-intelligence tasks under a unified web interface with persistent user logs."
+        ]
+      },
+      ipl: {
+        title: "IPL API Web Service — Technical Documentation",
+        img: "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcT0DgLbRtM-TJOKPIZI3bosg5_UZP9jW4DjbOwgN8jT6zjPKTKMqiiDqmC2s0xJIkoVKZxlNXC4QYqw50I",
+        alt: "Cricket match scoreboard display",
+        overview: "A RESTful cricket analytics API service built with Python and Flask over historical Indian Premier League (IPL) match and ball-by-ball/season datasets, paired with a developer portal supporting account creation and personal API key generation.",
+        architecture: [
+          "REST API Layer (Flask): Exposes 11 endpoints covering team performance comparisons, head-to-head records, batting/bowling statistics, and seasonal milestones.",
+          "Data Processing Layer (Pandas): Filters, aggregates, and computes strike rates, averages, win percentages, and matchup summaries on demand.",
+          "Auth & API Key Management: Users register and log in to generate/view API keys used to authenticate requests."
+        ],
+        workflow: [
+          "1. Developer/analyst registers and logs into the web portal.",
+          "2. Generates a personal API key from the dashboard.",
+          "3. Sends HTTP GET requests with query parameters (team names, seasons, players) and API key.",
+          "4. Flask validates the key, queries the processed IPL dataset via Pandas, and returns JSON."
+        ],
+        sampleCode: `GET /api/v1/head-to-head?team1=Mumbai%20Indians&team2=Chennai%20Super%20Kings&api_key=YOUR_API_KEY
+
+{
+  "team1": "Mumbai Indians",
+  "team2": "Chennai Super Kings",
+  "matches_played": 37,
+  "team1_wins": 20,
+  "team2_wins": 17
+}`,
+        outcomes: [
+          "Delivers 11 structured analytical endpoints for rapid cricket data querying.",
+          "Demonstrates end-to-end API design, authentication flow, and JSON response formatting."
+        ]
+      },
+      startup: {
+        title: "Startup Funding Analysis — Technical Documentation",
+        img: "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcT-TgMq4DuY4UvQoLsTdPjwEU_W8_aVVTBc6uBcR0AfX0awIA4w2xyvM8a-qt5tQcPAaoa5HJVzoW-Z0Zw",
+        alt: "Startup funding stages and growth chart",
+        overview: "An interactive Streamlit web application for exploring startup funding trends, investment rounds, top investors, and funded companies, complete with user registration and login.",
+        architecture: [
+          "Authentication Module: User signup and login flow before or alongside dashboard exploration.",
+          "Data Cleaning & Wrangling (Pandas): Standardizes date formats, investor names, city/sector labels, and funding amounts.",
+          "Analytical Modules: Dedicated views for Overall Market Overview, Investor Deep-Dive, and Startup/Company Deep-Dive."
+        ],
+        workflow: [
+          "1. User authenticates via login or creates a new account.",
+          "2. Selects Overall, Investor, or Startup analysis mode in Streamlit.",
+          "3. Inspects KPIs, top funded startups, investment stages, and investor activity charts."
+        ],
+        sampleCode: `# Example Pandas aggregation for top investors by total funding
+top_investors = (
+    df.groupby("investor", as_index=False)["amount_inr_cr"]
+      .sum()
+      .sort_values("amount_inr_cr", ascending=False)
+      .head(10)
+)`,
+        outcomes: [
+          "Turns raw funding records into structured investor and startup intelligence.",
+          "Provides an intuitive interactive interface for exploratory data analysis (EDA)."
+        ]
+      },
+      covid: {
+        title: "COVID-19 Dashboard — Technical Documentation",
+        img: "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSLCMzvKsUkEycVkgOG0KjpKvz__4FfDqO88z0zC0jB9wlKe4wMVdh8-JRDkK8HfWfJM7kFlKZzBAC8Uzk",
+        alt: "COVID-19 dashboard analytics chart and graphs",
+        overview: "An interactive analytical dashboard built with Plotly Dash to visualize COVID-19 case trends, distribution proportions, and comparative metrics through time-series graphs and pie charts.",
+        architecture: [
+          "Data Layer: Loads and prepares structured COVID-19 time-series and regional/category metrics.",
+          "Visualization Layer (Plotly): Generates responsive line/bar graphs for trend tracking and pie charts for share breakdown.",
+          "Dashboard Layout (Dash): Organizes charts cleanly for clear visual comparison."
+        ],
+        workflow: [
+          "1. Dataset is cleaned and structured for plotting.",
+          "2. Plotly figures are constructed to highlight progression and proportional distribution.",
+          "3. Rendered inside a Dash web layout for interactive chart inspection."
+        ],
+        sampleCode: `import plotly.express as px
+
+fig_pie = px.pie(
+    summary_df,
+    names="category",
+    values="cases",
+    title="COVID-19 Case Distribution"
+)`,
+        outcomes: [
+          "Makes multi-dimensional pandemic figures easy to read at a glance.",
+          "Reinforces practical skills in Dash layout structure and Plotly data visualization."
+        ]
+      },
+      scraping: {
+        title: "Flipkart Web Scraping — Technical Documentation",
+        img: "https://www.freecodecamp.org/news/content/images/2020/09/screenzy-1601054558203.png",
+        alt: "Python web scraping and data extraction screen",
+        overview: "A Python data-collection pipeline that extracts e-commerce product listings from Flipkart and compiles them into a structured dataset ready for cleaning and analysis.",
+        architecture: [
+          "HTTP & Parsing Layer: Fetches product listing pages and parses product titles, prices, ratings, and specifications.",
+          "Data Structuring Layer: Normalizes extracted fields into tabular rows and exports a clean dataset (e.g., CSV/DataFrame)."
+        ],
+        workflow: [
+          "1. Target search/category pages are requested via Python.",
+          "2. HTML elements containing product attributes are parsed and extracted.",
+          "3. Missing values and formatting inconsistencies are handled.",
+          "4. Final dataset is saved for downstream analysis and comparison."
+        ],
+        sampleCode: `import pandas as pd
+
+records = []
+for item in parsed_items:
+    records.append({
+        "product_name": item.get("title"),
+        "price": item.get("price"),
+        "rating": item.get("rating")
+    })
+
+dataset_df = pd.DataFrame(records)`,
+        outcomes: [
+          "Demonstrates real-world data acquisition directly from web sources.",
+          "Creates a reusable dataset foundation for pricing and product analytics."
+        ]
+      }
+    };
+
+    const modal = document.getElementById("docModal");
+    const docBody = document.getElementById("docBody");
+    const docImg = document.getElementById("docImg");
+    const docSwitch = document.getElementById("docSwitch");
+    const docClose = document.getElementById("docClose");
+
+    function renderSwitch(activeKey) {
+      docSwitch.innerHTML = "";
+      Object.entries(PROJECT_DOCS).forEach(([key, item]) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "doc-pill" + (key === activeKey ? " active" : "");
+        btn.textContent = item.title.split(" — ")[0];
+        btn.addEventListener("click", () => openDoc(key));
+        docSwitch.appendChild(btn);
+      });
+    }
+
+    function openDoc(key) {
+      const doc = PROJECT_DOCS[key];
+      if (!doc) return;
+
+      renderSwitch(key);
+      docImg.src = doc.img;
+      docImg.alt = doc.alt;
+
+      docBody.innerHTML = `
+        <h2 id="docTitle">${doc.title}</h2>
+        <p>${doc.overview}</p>
+
+        <h3>System Architecture</h3>
+        <ul>${doc.architecture.map(point => `<li>${point}</li>`).join("")}</ul>
+
+        <h3>Execution Workflow</h3>
+        <ul>${doc.workflow.map(step => `<li>${step}</li>`).join("")}</ul>
+
+        <h3>Implementation Example</h3>
+        <div class="doc-code">${doc.sampleCode}</div>
+
+        <h3>Key Outcomes &amp; Takeaways</h3>
+        <ul>${doc.outcomes.map(out => `<li>${out}</li>`).join("")}</ul>
+      `;
+
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      docClose.focus();
+    }
+
+    function closeDoc() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".card[data-doc]").forEach(card => {
+      const key = card.getAttribute("data-doc");
+      card.addEventListener("click", () => openDoc(key));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openDoc(key);
+        }
+      });
+    });
+
+    docClose.addEventListener("click", closeDoc);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeDoc();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) {
+        closeDoc();
+      }
+    });
+  </script>
+</body>
+</html>

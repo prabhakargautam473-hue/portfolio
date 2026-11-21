@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact – Chandrakar Parsad Gautam</title>
+
+  <!-- Google Font (needs internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Colours and basics (Exact match with home.html) ===== */
+    :root {
+      --ink: #F1F3FF;
+      --grey: #D2D2D2;
+      --dark: #0A0C1C;
+      --line: rgba(255, 255, 255, .14);
+      --c1: #00D2E8;
+      --c2: #3446E0;
+      --c3: #8E2BE6;
+      --c4: #E3208C;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #000; }
+    body {
+      color: var(--ink);
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== Page-load animation ===== */
+    .rise {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards;
+      animation-delay: var(--d, 0s);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ===== TOP HEADER BAND (Grey background with diagonal bottom cut) ===== */
+    .page-header {
+      position: relative;
+      background: var(--grey);
+      padding-bottom: 110px;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 48px), 0 100%);
+    }
+
+    /* top bar (Identical to home.html) */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px max(20px, calc((100% - 1180px) / 2 + 20px)) 0;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      font-weight: 700; letter-spacing: .04em; color: #fff;
+      background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+    }
+    .menu { display: flex; align-items: center; gap: 6px; font-size: .92rem; }
+    .menu a {
+      color: var(--dark);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-weight: 500;
+      transition: background .2s, color .2s;
+    }
+    .menu a:hover { background: rgba(10, 12, 28, .1); }
+    .menu a.active { background: var(--dark); color: #fff; font-weight: 600; }
+    .menu a.active:hover { background: var(--c2); }
+    .menu a:focus-visible { outline: 3px solid var(--c2); outline-offset: 3px; }
+
+    /* Header Title Area */
+    .header-content {
+      max-width: 1000px;
+      margin: 46px auto 0;
+      padding: 0 20px;
+    }
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #3C4156;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      letter-spacing: .03em;
+      line-height: 1.15;
+      background: linear-gradient(90deg, var(--dark), var(--c2), var(--c3), var(--dark));
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 7s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 250% 0; } }
+
+    .subtitle {
+      margin: 14px 0 0;
+      max-width: 62ch;
+      color: #2A2E45;
+      font-size: 1.12rem;
+    }
+
+    /* Status Pill inside Grey Header */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      background: rgba(10, 12, 28, .08);
+      border: 1px solid rgba(10, 12, 28, .14);
+      color: var(--dark);
+      font-size: .92rem;
+      font-weight: 600;
+    }
+    .pulse-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #00A86B;
+      box-shadow: 0 0 0 0 rgba(0, 168, 107, .6);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 168, 107, .6); }
+      70% { box-shadow: 0 0 0 8px rgba(0, 168, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 168, 107, 0); }
+    }
+
+    /* ===== MAIN CONTACT SECTION (Black background) ===== */
+    .band {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 20px 88px;
+    }
+    h2 { margin: 0 0 14px; font-size: 1.85rem; font-weight: 600; }
+    h2::after {
+      content: "";
+      display: block;
+      width: 64px; height: 4px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--c1), var(--c4));
+      animation: grow 1.2s .6s both cubic-bezier(.2, .7, .2, 1);
+    }
+    @keyframes grow { from { width: 0; } to { width: 64px; } }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 44px;
+      margin-top: 32px;
+      align-items: start;
+    }
+
+    /* Left Column: Direct Links & Details */
+    .channels {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .channel-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: #0C0F26;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .channel-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--c1);
+      box-shadow: 0 10px 28px rgba(0, 210, 232, .22);
+    }
+    .channel-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+    .icon-box {
+      width: 46px; height: 46px;
+      flex-shrink: 0;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .06);
+      color: var(--c1);
+    }
+    .icon-box svg { width: 22px; height: 22px; fill: currentColor; }
+    .channel-info { min-width: 0; }
+    .channel-label {
+      display: block;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #9AA2C8;
+    }
+    .channel-val {
+      display: block;
+      font-weight: 600;
+      font-size: 1.02rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Copy Email Button */
+    .copy-btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .06);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .copy-btn:hover {
+      background: var(--c1);
+      border-color: var(--c1);
+      color: var(--dark);
+    }
+    .arrow-badge {
+      color: #9AA2C8;
+      font-size: 1.2rem;
+      transition: transform .2s, color .2s;
+    }
+    .channel-card:hover .arrow-badge {
+      transform: translateX(4px);
+      color: var(--c1);
+    }
+
+    /* Location & Timezone Info Box */
+    .meta-strip {
+      margin-top: 8px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px dashed var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .95rem;
+      color: #B8C0E0;
+    }
+    .meta-strip strong { color: var(--ink); }
+
+    /* Right Column: Direct Message Form */
+    .form-box {
+      padding: 28px;
+      border-radius: 20px;
+      background: #0C0F26;
+      border: 1px solid var(--line);
+    }
+    .form-box h3 {
+      margin: 0 0 6px;
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    .form-box p {
+      margin: 0 0 20px;
+      font-size: .95rem;
+      color: #A6B0D6;
+    }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #D6DCF5;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, .45);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: .98rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--c1);
+      box-shadow: 0 0 0 3px rgba(0, 210, 232, .2);
+    }
+    .field textarea { min-height: 115px; resize: vertical; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--c2), var(--c3), var(--c4));
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(142, 43, 230, .45);
+    }
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .form-note {
+      margin: 12px 0 0;
+      font-size: .9rem;
+      color: var(--c1);
+      min-height: 1.4em;
+    }
+
+    /* ===== PHONE RESPONSIVE ===== */
+    @media (max-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 760px) {
+      .topbar { padding: 16px 20px 0; }
+      .menu { font-size: .8rem; gap: 2px; }
+      .menu a { padding: 6px 9px; }
+      .page-header { padding-bottom: 84px; }
+      .header-content { margin-top: 30px; }
+    }
+    @media (max-width: 480px) {
+      .logo { display: none; }
+      .menu { font-size: .78rem; }
+      .form-box { padding: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1, h2::after, .pulse-dot { animation: none; }
+      .rise { animation: none; opacity: 1; transform: none; }
+      .channel-card, .submit-btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER (Grey top band with same navbar) ===== -->
+  <header class="page-header">
+    <div class="topbar rise" style="--d:.05s">
+      <div class="logo" aria-hidden="true">CG</div>
+      <nav class="menu" aria-label="Main">
+        <a href="home.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="project.html">Projects</a>
+        <a class="active" href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="header-content">
+      <p class="eyebrow rise" style="--d:.15s">Get in touch</p>
+      <h1 class="rise" style="--d:.25s">LET’S CONNECT &amp; COLLABORATE</h1>
+      <p class="subtitle rise" style="--d:.35s">
+        Have a dataset that needs cleaning, a dashboard idea, a Data Analyst internship opportunity, or feedback on my projects? Reach out directly—I usually reply within 24 hours.
+      </p>
+      <div class="status-badge rise" style="--d:.45s">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        Open to Data Analyst Internships &amp; Freelance Analytics Projects
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT (Black background band) ===== -->
+  <main class="band">
+    <h2 class="rise" style="--d:.55s">Direct Channels</h2>
+
+    <div class="contact-grid">
+      <!-- Left: Email, LinkedIn, GitHub, Phone/WhatsApp, Location -->
+      <div class="channels rise" style="--d:.65s">
+
+        <!-- 1. Email with One-Click Copy -->
+        <div class="channel-card">
+          <a href="mailto:prabhakargautam473@gmail.com" class="channel-left" style="text-decoration:none; color:inherit; flex:1;">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div class="channel-info">
+              <span class="channel-label">Email</span>
+              <span class="channel-val" id="email-text">prabhakargautam473@gmail.com</span>
+            </div>
+          </a>
+          <button type="button" class="copy-btn" id="copy-email" aria-label="Copy email address">Copy</button>
+        </div>
+
+        <!-- 2. LinkedIn -->
+     <a class="channel-card" href="https://www.linkedin.com/in/chandrakar-gautam-652082398/" target="_blank" rel="noopener noreferrer">
+  <div class="channel-left">
+    <div class="icon-box" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+    </div>
+    <div class="channel-info">
+      <span class="channel-label">LinkedIn</span>
+      <span class="channel-val">linkedin.com/in/chandrakar-gautam-652082398</span>
+    </div>
+  </div>
+  <span class="arrow-badge" aria-hidden="true">&rarr;</span>
+</a>
+
+        <!-- 3. GitHub -->
+        <a class="channel-card" href="https://github.com/prabhakargautam473-hue" target="_blank" rel="noopener noreferrer">
+          <div class="channel-left">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            </div>
+            <div class="channel-info">
+              <span class="channel-label">GitHub (Code &amp; Notebooks)</span>
+              <span class="channel-val">github.com/prabhakargautam473-hue</span>
+            </div>
+          </div>
+          <span class="arrow-badge" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <!-- 4. Phone / WhatsApp -->
+        <a class="channel-card" href="tel:+919993224322">
+          <div class="channel-left">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+            <div class="channel-info">
+              <span class="channel-label">Phone / WhatsApp</span>
+              <span class="channel-val">+91 99932 24322</span>
+            </div>
+          </div>
+          <span class="arrow-badge" aria-hidden="true">&rarr;</span>
+        </a>
+
+        <!-- 5. Location & Availability -->
+        <div class="meta-strip">
+          <span><strong>Location:</strong> Bhopal, Madhya Pradesh, India</span>
+          <span><strong>Timezone:</strong> IST (UTC +5:30)</span>
+        </div>
+      </div>
+
+      <!-- Right: Direct Message Form -->
+      <div class="form-box rise" style="--d:.8s">
+        <h3>Send a Quick Message</h3>
+        <p>Fill out the details below and click Send — your message will land directly in my inbox.</p>
+
+        <form id="contact-form" action="https://formsubmit.co/ajax/prabhakargautam473@gmail.com" method="POST">
+          <!-- FormSubmit Settings -->
+          <input type="hidden" name="_subject" value="New Portfolio Message from Contact Page">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="field">
+            <label for="sender-name">Your Name</label>
+            <input type="text" id="sender-name" name="Name" placeholder="e.g., Rahul Sharma" required>
+          </div>
+
+          <div class="field">
+            <label for="sender-email">Your Email</label>
+            <input type="email" id="sender-email" name="Email" placeholder="e.g., rahul@company.com" required>
+          </div>
+
+          <div class="field">
+            <label for="topic">Reason for Reaching Out</label>
+            <select id="topic" name="Topic">
+              <option value="Internship / Job Opportunity">Internship / Job Opportunity</option>
+              <option value="Data Analysis / Dashboard Project">Data Analysis / Dashboard Project</option>
+              <option value="Collaboration / Networking">Collaboration / Networking</option>
+              <option value="Project Feedback">Project Feedback</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="Message" placeholder="Tell me briefly about the role, dataset, or idea..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">Send Message &rarr;</button>
+          <p class="form-note" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // 1. One-click copy email button
+    (function () {
+      var copyBtn = document.getElementById('copy-email');
+      var emailEl = document.getElementById('email-text');
+      if (!copyBtn || !emailEl) return;
+
+      copyBtn.addEventListener('click', function () {
+        var email = emailEl.textContent.trim();
+        navigator.clipboard.writeText(email).then(function () {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+        });
+      });
+    })();
+
+    // 2. Direct email delivery via FormSubmit
+    (function () {
+      var form = document.getElementById('contact-form');
+      var status = document.getElementById('form-status');
+      var btn = document.getElementById('submit-btn');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        status.style.color = '#00D2E8';
+        status.textContent = '';
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          if (data.success === "true" || data.success === true) {
+            status.textContent = 'Message sent! Check prabhakargautam473@gmail.com (for the very first test, activate the confirmation link sent by FormSubmit).';
+            form.reset();
+          } else {
+            status.style.color = '#FF6B8B';
+            status.textContent = data.message || 'Could not send message. Please try again.';
+          }
+        })
+        .catch(function () {
+          status.style.color = '#FF6B8B';
+          status.textContent = 'Network error or local file restriction. Please run via Live Server or deploy to test.';
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.innerHTML = 'Send Message &rarr;';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
